@@ -1,0 +1,141 @@
+@extends('layouts.app')
+
+
+@section('content')
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>My Account</h1>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        @include('_message')
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form method="post" action="" enctype="multipart/form-data">
+                                @csrf
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>First Name<span style="color:red;">*</span></label>
+                                            <input type="name" name="name" value="{{ old('name', $getRecord->name) }}"
+                                                class="form-control" required placeholder="First Name">
+                                            <div style="color:red">{{ $errors->first('name') }}</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Last Name<span style="color:red;">*</span></label>
+                                            <input type="name" name="last_name"
+                                                value="{{ old('last_name', $getRecord->last_name) }}" class="form-control"
+                                                required placeholder="Last Name">
+                                            <div style="color:red">{{ $errors->first('last_name') }}</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Gender<span style="color:red;">*</span></label>
+                                            <select class="form-control" required name="gender">
+                                                <option value="">Select Gender</option>
+                                                <option {{ old('gender', $getRecord->gender) == 'male' ? 'selected' : '' }}
+                                                    value="male">
+                                                    Male
+                                                </option>
+                                                <option
+                                                    {{ old('gender', $getRecord->gender) == 'female' ? 'selected' : '' }}
+                                                    value="female">
+                                                    Female</option>
+                                                <option {{ old('gender', $getRecord->gender) == 'other' ? 'selected' : '' }}
+                                                    value="other">
+                                                    Other</option>
+                                            </select>
+                                            <div style="color:red">{{ $errors->first('gender') }}</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Mobile Number</label>
+                                            <input type="name" name="mobile_number"
+                                                value="{{ old('mobile_number', $getRecord->mobile_number) }}"
+                                                class="form-control" placeholder="Mobile Number">
+                                            <div style="color:red">{{ $errors->first('mobile_number') }}</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Date of Birth<span style="color:red;">*</span></label>
+                                            <input type="date" name="date_of_birth"
+                                                value="{{ old('date_of_birth', $getRecord->date_of_birth) }}"
+                                                class="form-control" placeholder="Date_of_birth">
+                                            <div style="color:red">{{ $errors->first('date_of_birth') }}</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Profile Pic<span style="color:red;">*</span></label>
+                                            <input type="file" name="profile_pic" value="{{ old('profile_pic') }}"
+                                                class="form-control">
+                                            <div style="color:red">{{ $errors->first('profile_pic') }}</div>
+                                            @if (!empty($getRecord->getProfile()))
+                                                <img src="{{ $getRecord->getProfile() }}" style="width:100px;"
+                                                    alt="">
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Marital Status<span style="color:red;"></span></label>
+                                            <input type="text" name="marital_status"
+                                                value="{{ old('marital_status', $getRecord->marital_status) }}"
+                                                class="form-control" placeholder="marital_status">
+                                            <div style="color:red">{{ $errors->first('marital_status') }}</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Current Address<span style="color:red;"></span></label>
+                                            <textarea class="form-control" name="address" required>{{ old('address', $getRecord->address) }}</textarea>
+                                            <div style="color:red">{{ $errors->first('address') }}</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Permanent Address<span style="color:red;"></span></label>
+                                            <textarea class="form-control" name="permanent_address" required>{{ old('permanent_address', $getRecord->permanent_address) }}</textarea>
+                                            <div style="color:red">{{ $errors->first('permanent_address') }}</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Qualification<span style="color:red;"></span></label>
+                                            <textarea class="form-control" name="qualification" required>{{ old('qualification', $getRecord->qualification) }}</textarea>
+                                            <div style="color:red">{{ $errors->first('qualification') }}</div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Work Experience<span style="color:red;"></span></label>
+                                            <textarea class="form-control" name="experience" required>{{ old('experience', $getRecord->experience) }}</textarea>
+                                            <div style="color:red">{{ $errors->first('experience') }}</div>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label>Email<span style="color:red;">*</span></label>
+                                            <input type="email" name="email"
+                                                value="{{ old('email', $getRecord->email) }}" class="form-control" required
+                                                placeholder="Email">
+                                            <div style="color:red">{{ $errors->first('email') }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- /.card -->
+                    </div>
+                    <!--/.col (left) -->
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+@endsection
